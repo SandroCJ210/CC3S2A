@@ -32,7 +32,7 @@ Pues el el único merge que mantiene un historial lineal es el merge fast forwar
 
 2. **¿Qué problemas potenciales podrían surgir si haces rebase en una rama compartida con otros miembros del equipo?**  
 
- Pueden ocurrir problemas de sincronización, ya que, al cambiar la base de la rama, git puede intentar añadir commits a esta, lo que puede causar un conflicto que afecte el proyecto. Además los demás miembros del equipo van a tener una historia diferente a la de antes y sobre la cuál ya habían trabajdo, esto va a ocasionar que no puedan hacer push, lo que los llevará a realizar modificaciones para resolver estos conflictos.
+   Pueden ocurrir problemas de sincronización, ya que, al cambiar la base de la rama, git puede intentar añadir commits a esta, lo que puede causar un conflicto que afecte el proyecto. Además los demás miembros del equipo van a tener una historia diferente a la de antes y sobre la cuál ya habían trabajdo, esto va a ocasionar que no puedan hacer push, lo que los llevará a realizar modificaciones para resolver estos conflictos.
 
 
 3. **¿En qué se diferencia cherry-pick de merge, y en qué situaciones preferirías uno sobre el otro?**  
@@ -88,11 +88,15 @@ Más que nada para el avance más rápido del desarrollo. El poder seleccionar c
 Para tener un historial controlado y ordenado, además que se evitan los conflictos de que varios trabajen en un mismo código y permite que se puedan integrar ciertas funcionalidades sin tener que depender de que las otras también estén terminadas.
 
 ### Fase 2:
+Se hace un rebase a feature-user-story-1 con base en main
 ![2 rebase](images/2rebase.png)
+
+**¿Qué ventajas proporciona el rebase durante el desarrollo de un sprint en términos de integración continua?**
+
 
 ### Fase 3:
 
-![](images/2%20cherrypick.png)
+![](images/2cherrypick.png)
 
 **¿Cómo ayuda git cherry-pick a mostrar avances de forma selectiva en un sprint review?**
 
