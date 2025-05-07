@@ -3,7 +3,7 @@ import pytest
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from models import db
+from models import db, app
 from models.account import Account
 
 ACCOUNT_DATA = {}
@@ -12,10 +12,12 @@ ACCOUNT_DATA = {}
 def setup_database():
     """Configura la base de datos antes y después de todas las pruebas"""
     # Se ejecuta antes de todas las pruebas
-    db.create_all()
-    yield
-    # Se ejecuta después de todas las pruebas
-    db.session.close()
+    with app.app_context():
+        db.create_all()
+        yield
+        # Se ejecuta después de todas las pruebas
+        db.session.remove()
+        db.session.close()
 
 class TestAccountModel:
     """Modelo de Pruebas de Cuenta"""
@@ -35,12 +37,14 @@ class TestAccountModel:
 
     def setup_method(self):
         """Truncar las tablas antes de cada prueba"""
-        db.session.query(Account).delete()
-        db.session.commit()
+        with app.app_context():
+            db.session.query(Account).delete()
+            db.session.commit()
 
     def teardown_method(self):
         """Eliminar la sesión después de cada prueba"""
-        db.session.remove()
+        with app.app_context():
+            db.session.remove()
 
     ######################################################################
     #  Casos de prueba
@@ -49,13 +53,15 @@ class TestAccountModel:
     def test_create_an_account(self):
         """Probar la creación de una sola cuenta"""
         data = ACCOUNT_DATA[0]  # obtener la primera cuenta
-        account = Account(**data)
-        account.create()
-        assert len(Account.all()) == 1
+        with app.app_context():
+            account = Account(**data)
+            account.create()
+            assert len(Account.all()) == 1
 
     def test_create_all_accounts(self):
         """Probar la creación de múltiples cuentas"""
-        for data in ACCOUNT_DATA:
-            account = Account(**data)
-            account.create()
-        assert len(Account.all()) == len(ACCOUNT_DATA)
+        with app.app_context():
+            for data in ACCOUNT_DATA:
+                account = Account(**data)
+                account.create()
+            assert len(Account.all()) == len(ACCOUNT_DATA)
