@@ -68,3 +68,13 @@ class TestStack(TestCase):
             "Después de agregar un elemento, la pila no debe estar vacía"
         )
 
+    def test_pop2(self):
+        self.stack.push(3)
+        self.stack.push(5)
+
+        self.assertEqual(self.stack.pop(), 5)
+        self.assertEqual(self.stack.peek(), 3)
+        
+        self.stack.pop()
+
+        self.assertTrue(self.stack.is_empty())
