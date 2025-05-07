@@ -13,8 +13,9 @@ class TestStack(TestCase):
         """Limpieza después de cada prueba."""
         self.stack = None
 
+    """
     def test_push(self) -> None:
-        """Prueba de insertar un elemento en la pila."""
+        Prueba de insertar un elemento en la pila.
         stack = Stack()
         stack.push(1)
         self.assertEqual(
@@ -26,6 +27,13 @@ class TestStack(TestCase):
             stack.peek(), 2,
             "Después de otro push, el valor superior debe ser el último agregado"
         )
+    """ 
+
+    def test_push(self):
+        self.stack.push(3)
+        self.assertEqual(self.stack.peek(), 3)
+        self.stack.push(5)
+        self.assertEqual(self.stack.peek(), 5)
 
     def test_pop(self) -> None:
         """Prueba de eliminar un elemento de la pila."""
@@ -40,10 +48,10 @@ class TestStack(TestCase):
             stack.peek(), 1,
             "Después de pop(), el valor superior debe ser 1"
         )
-
+    
+    """
     def test_peek(self) -> None:
-        """Prueba de observar el elemento superior de la pila."""
-        stack = Stack()
+        Prueba de observar el elemento superior de la pila.        stack = Stack()
         stack.push(1)
         stack.push(2)
         self.assertEqual(
@@ -53,7 +61,12 @@ class TestStack(TestCase):
         self.assertEqual(
             stack.peek(), 2,
             "La pila no debe cambiar después de peek()"
-        )
+        ) """
+
+    def test_peek(self):
+        self.stack.push(3)
+        self.stack.push(5)
+        self.assertEqual(self.stack.peek(), 5)
 
     def test_is_empty(self) -> None:
         """Prueba de si la pila está vacía."""
