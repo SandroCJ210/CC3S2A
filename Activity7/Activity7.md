@@ -257,5 +257,4 @@ Con la historia de usuario se escribe el siguiente escenario Gherkin
     Entonces mi estómago no debería gruñir
 ```
 
-## Ejercicio 10
 
